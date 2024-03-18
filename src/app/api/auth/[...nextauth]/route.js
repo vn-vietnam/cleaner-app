@@ -7,11 +7,11 @@ export const authOptions = {
         id: "descope",
         name: "Descope",
         type: "oauth",
-        wellKnown: `https://api.descope.com/P2dqIKfO8YMYRHTYaRVVCJ9bFMvx/.well-known/openid-configuration`,
+        wellKnown: `https://api.descope.com/${process.env.DESCOPE_PROJECT_ID}/.well-known/openid-configuration`,
         authorization: { params: { scope: "openid email profile" } },
         idToken: true,
-        clientId: "P2dqIKfO8YMYRHTYaRVVCJ9bFMvx",
-        clientSecret: "<Descope Access Key>",
+        clientId: process.env.DESCOPE_PROJECT_ID,
+        clientSecret: process.env.DESCOPE_ACCESS_KEY,
         checks: ["pkce", "state"],
         profile(profile) {
             return {
