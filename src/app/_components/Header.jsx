@@ -25,35 +25,44 @@ import {
 
 const linksMenu = [
 	{
-		url: "/category/1",
-		name: "Home",
+		url: "/category/cltvbmj4q0ir6071d96lu8nxv",
+		name: "Full Service",
 		information: "Lorem ipsum dolor sit amet.",
 	},
 	{
-		url: "/contact",
-		name: "Contact",
+		url: "/category/cltvbocsa0j67071dxdoe01s8",
+		name: "Normal House",
 		information: "Lorem ipsum dolor sit amet.",
 	},
 	{
-		url: "/works",
-		name: "Search",
+		url: "/category/cltvbp44f0j82071dht5x3iza",
+		name: "Big House",
 		information: "Lorem ipsum dolor sit amet.",
 	},
 	{
-		url: "/policy",
-		name: "Policy",
+		url: "/category/cltxpxews0vdl07zvq9spz3i6",
+		name: "Smaill House",
 		information: "Lorem ipsum dolor sit amet.",
 	},
 	{
-		url: "/category",
-		name: "Category",
+		url: "/category/cltxpzmgq0vbk0714utpqvhci",
+		name: "Service 1",
+		information: "Lorem ipsum dolor sit amet.",
+	},
+	{
+		url: "/category/cltxq0bww0vd20714oh4fr9li",
+		name: "Service 2",
+		information: "Lorem ipsum dolor sit amet.",
+	},
+	{
+		url: "/category/cltxq112p0vfb0714wribfgir",
+		name: "Service 3",
 		information: "Lorem ipsum dolor sit amet.",
 	},
 ];
 
 function Header() {
 	const { data } = useSession();
-	// console.log(data);
 
 	return (
 		<header className="bg-white">
@@ -101,11 +110,11 @@ function Header() {
 													</div>
 												</Link>
 												<Link
-													href="/contact"
-													title="Contact"
+													href="/workers/signup"
+													title="Sign as worker"
 													className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
 												>
-													<div className="text-md font-bold">Contact</div>
+													<div className="text-md font-bold">Sign as worker</div>
 													<div className="leading-tight text-muted-foreground">
 														Lorem ipsum dolor sit amet consectetur.
 													</div>
@@ -177,7 +186,7 @@ function Header() {
 								<div className="sm:flex sm:gap-4">
 									<div
 										className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer"
-										onClick={() => signIn("descope", { callbackUrl: "/" })}
+										onClick={() => signIn("descope", { callbackUrl: "/signup" })}
 									>
 										Login
 									</div>
@@ -185,7 +194,7 @@ function Header() {
 									<div className="hidden sm:flex">
 										<div
 											className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-											onClick={() => signIn("descope", { callbackUrl: "/" })}
+											onClick={() => signIn("descope", { callbackUrl: "/signup" })}
 										>
 											Register
 										</div>

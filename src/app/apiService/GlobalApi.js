@@ -201,6 +201,45 @@ const BusinessBookedSlot=async(businessId,date)=>{
   
   }
   
+  const signWithWorker=async(tf,id)=>{
+	const mutationQuery=gql`
+	mutation signWithWorker {
+		updateBusiness(where: {id: "`+id+`"}, data: {isUser: "`+tf+`"}) {
+			isUser
+		  }
+	}
+	
+	
+	`
+  
+	const result=await request(MASTER_URL,mutationQuery)
+	return result;
+  
+  }
+  
+  const createNewBussiness=async(name,contact,address,about,email,url,cateId)=>{
+	const mutationQuery=gql`
+	mutation createNewBussiness {
+		createBusiness(
+			data: {name: "`+name+`", contactPerson: "`+contact+`", address: "`+address+`", isUser: false, about: "`+about+`", email: "`+email+`", image: {create: {uploadUrl: "`+url+`"}}, categories: {connect: {id: "`+cateId+`"}}}
+		  ) {
+			email
+			name
+			address
+			contactPerson
+			id
+		  }
+
+	}
+	
+	
+	`
+  
+	const result=await request(MASTER_URL,mutationQuery)
+	return result;
+  
+  }
+  
 
 
 export default {
@@ -211,5 +250,7 @@ export default {
 	createNewBooking,
 	BusinessBookedSlot,
 	GetUserBookingHistory,
-	deleteBooking
+	deleteBooking,
+	signWithWorker,
+	createNewBussiness
 };

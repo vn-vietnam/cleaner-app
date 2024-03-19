@@ -17,7 +17,7 @@ function page() {
 	 */
 	const GetUserBookingHistory = () => {
 		GlobalApi.GetUserBookingHistory(data.user.email).then((resp) => {
-			console.log(resp);
+			// console.log(resp);
 			setBookingHistory(resp.bookings);
 		});
 	};

@@ -35,7 +35,7 @@ function BookingSection({ bookingHistory, getUserBookingHistory }) {
 	};
 	return (
 		<>
-			<table className=" border-separate border-spacing-2 border border-slate-400 w-full rounded-lg table-auto">
+			<table className=" border-separate border-spacing-2 border border-slate-400 w-full rounded-lg table-auto ">
 				<thead>
 					<tr className="text-left">
 						<th>ID</th>
