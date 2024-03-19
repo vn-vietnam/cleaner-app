@@ -35,10 +35,10 @@ function BookingSection({ bookingHistory, getUserBookingHistory }) {
 	};
 	return (
 		<>
-			<table className=" border-separate border-spacing-2 border border-slate-400 w-full rounded-lg table-auto ">
+			<table className=" border-separate border-spacing-2 border border-slate-400 w-full rounded-lg table-auto overflow-x-auto">
 				<thead>
 					<tr className="text-left">
-						<th>ID</th>
+						{/* <th>ID</th> */}
 						<th>Date</th>
 						<th>Time</th>
 						<th>Worker</th>
@@ -50,10 +50,10 @@ function BookingSection({ bookingHistory, getUserBookingHistory }) {
 					{bookingHistory.length > 0 &&
 						bookingHistory?.map((e, index) => (
 							<tr key={index} className="text-sm">
-								<td className="tracking-tighter  line-clamp-[2px]">{e?.id}</td>
+								{/* <td className="">{e?.id}</td> */}
 								<td>{e?.date}</td>
 								<td>{e?.time}</td>
-								<td className="flex items-center gap-1">
+								<td className="flex items-center gap-1 flex-col sm:flex-row">
 									<Image
 										src={e?.business?.image?.url}
 										alt="img"

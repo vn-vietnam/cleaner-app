@@ -16,7 +16,7 @@ function CategoryList({ paramId }) {
 		});
 	};
 	return (
-		<div className="flex w-full justify-center gap-3">
+		<div className="flex w-full justify-start sm:justify-center gap-3 overflow-x-auto p-5">
 			{categoryList.map((e, index) => (
 				<Link
 					href={"/category/" + e.id}
