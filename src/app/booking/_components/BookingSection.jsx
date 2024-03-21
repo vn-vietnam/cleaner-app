@@ -1,13 +1,16 @@
 import React from "react";
 import {
-	Table,
-	TableBody,
-	TableCaption,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlobalApi from "@/app/apiService/GlobalApi";
@@ -67,12 +70,30 @@ function BookingSection({ bookingHistory, getUserBookingHistory }) {
 									<Button>{e?.progressStatus}</Button>
 								</td>
 								<td>
-									<Button
-										onClick={() => cancelAppointment(e?.id)}
-										className="bg-red-500 cursor-pointer"
-									>
-										Delete
-									</Button>
+									<AlertDialog>
+										<AlertDialogTrigger
+											
+											className="bg-red-500 cursor-pointer p-2 rounded-lg font-normal text-white hover:bg-slate-600"
+										>
+											Delete
+										</AlertDialogTrigger>
+										<AlertDialogContent>
+											<AlertDialogHeader>
+												<AlertDialogTitle>
+													Are you absolutely sure?
+												</AlertDialogTitle>
+												<AlertDialogDescription>
+													This action cannot be undone. This will permanently
+													delete your account and remove your data from our
+													servers.
+												</AlertDialogDescription>
+											</AlertDialogHeader>
+											<AlertDialogFooter>
+												<AlertDialogCancel>Cancel</AlertDialogCancel>
+												<AlertDialogAction onClick={() => cancelAppointment(e?.id)} className="bg-red-400">Continue</AlertDialogAction>
+											</AlertDialogFooter>
+										</AlertDialogContent>
+									</AlertDialog>
 								</td>
 							</tr>
 						))}
