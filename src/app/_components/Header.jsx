@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -22,47 +22,22 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-const linksMenu = [
-	{
-		url: "/category/cltvbmj4q0ir6071d96lu8nxv",
-		name: "Full Service",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltvbocsa0j67071dxdoe01s8",
-		name: "Normal House",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltvbp44f0j82071dht5x3iza",
-		name: "Big House",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltxpxews0vdl07zvq9spz3i6",
-		name: "Smaill House",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltxpzmgq0vbk0714utpqvhci",
-		name: "Service 1",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltxq0bww0vd20714oh4fr9li",
-		name: "Service 2",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-	{
-		url: "/category/cltxq112p0vfb0714wribfgir",
-		name: "Service 3",
-		information: "Lorem ipsum dolor sit amet.",
-	},
-];
+import GlobalApi from "../apiService/GlobalApi";
 
 function Header() {
 	const { data } = useSession();
+
+	const [cate, setCate] = useState();
+
+	const getCate = () => {
+		GlobalApi.getCategory().then((e)=>{
+			// console.log(e.categories)
+			setCate(e.categories)
+		});
+	};
+	useEffect(() => {
+		getCate();
+	}, []);
 
 	return (
 		<header className="bg-white">
@@ -88,13 +63,12 @@ function Header() {
 															className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear"
 															href="/"
 														>
-															<Home />
+															<Home width={50} height={50} />
 															<div className="mb-2 mt-4 text-lg font-medium">
 																Home Page
 															</div>
 															<p className="text-sm leading-tight text-muted-foreground">
-																Beautifully designed components built with Radix
-																UI and Tailwind CSS.
+																Your Gateway to the Perfect Hom
 															</p>
 														</Link>
 													</NavigationMenuLink>
@@ -106,10 +80,33 @@ function Header() {
 												>
 													<div className="text-md font-bold">Blog</div>
 													<div className="leading-tight text-muted-foreground">
-														Lorem ipsum dolor sit amet consectetur.
+														The Art of Finding Home: Stories and Strategies from
+														HomeFinder
 													</div>
 												</Link>
 												<Link
+													href="/contact"
+													title="Contact"
+													className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
+												>
+													<div className="text-md font-bold">Contact</div>
+													<div className="leading-tight text-muted-foreground">
+														Get in Touch with HomeFinder
+													</div>
+												</Link>
+												<Link
+													href="/policy"
+													title="Privacy and Terms"
+													className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
+												>
+													<div className="text-md font-bold">
+														Privacy and Terms
+													</div>
+													<div className="leading-tight text-muted-foreground">
+														Guide to Privacy and Terms
+													</div>
+												</Link>
+												{/* <Link
 													href="/workers/signup"
 													title="Sign as worker"
 													className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
@@ -118,8 +115,8 @@ function Header() {
 													<div className="leading-tight text-muted-foreground">
 														Lorem ipsum dolor sit amet consectetur.
 													</div>
-												</Link>
-												<Link
+												</Link> */}
+												{/* <Link
 													href="/workers"
 													title="Workers"
 													className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
@@ -128,7 +125,7 @@ function Header() {
 													<div className="leading-tight text-muted-foreground">
 														Find the best workers
 													</div>
-												</Link>
+												</Link> */}
 											</ul>
 										</NavigationMenuContent>
 									</NavigationMenuItem>
@@ -136,16 +133,16 @@ function Header() {
 										<NavigationMenuTrigger>Category</NavigationMenuTrigger>
 										<NavigationMenuContent>
 											<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-												{linksMenu.map((e, index) => (
+												{cate?.map((e, index) => (
 													<Link
 														key={index}
-														href={e.url}
+														href={'/category/'+e?.id}
 														title="Blog"
 														className="rounded-md bg-gradient-to-b hover:bg-slate-400 hover:bg-gradient-to-t transition-all ease-linear from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md text-sm"
 													>
-														<div className="text-md font-bold">{e.name}</div>
-														<div className="leading-tight text-muted-foreground">
-															{e.information}
+														<div className="text-md font-bold">{e?.name}</div>
+														<div className="leading-tight text-muted-foreground line-clamp-2">
+															{e?.description}
 														</div>
 													</Link>
 												))}
@@ -171,11 +168,11 @@ function Header() {
 										href={"/booking"}
 										className="hidden sm:block rounded-md bg-slate-400 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer"
 									>
-										Booking
+										My Booking
 									</Link>
 									<div
 										className="hidden sm:block rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer"
-										onClick={() => signOut()}
+										onClick={() => signOut("descope", { callbackUrl: "/" })}
 									>
 										Logout
 									</div>
@@ -186,18 +183,11 @@ function Header() {
 								<div className="sm:flex sm:gap-4">
 									<div
 										className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer"
-										onClick={() => signIn("descope", { callbackUrl: "/signup" })}
+										onClick={() =>
+											signIn("descope", { callbackUrl: "/" })
+										}
 									>
 										Login
-									</div>
-
-									<div className="hidden sm:flex">
-										<div
-											className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-											onClick={() => signIn("descope", { callbackUrl: "/signup" })}
-										>
-											Register
-										</div>
 									</div>
 								</div>
 							</>
@@ -226,11 +216,31 @@ function Header() {
 								<DropdownMenuContent>
 									{data ? (
 										<>
-											<DropdownMenuLabel>My Account</DropdownMenuLabel>
+											<DropdownMenuLabel>Hello {data?.user?.name}</DropdownMenuLabel>
 											<DropdownMenuSeparator />
 											<DropdownMenuItem>
 												<Link href={"/booking"} alt="my booking">
 													My Booking
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/category"} alt="category">
+													Category
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/contact"} alt="Contact">
+													Contact
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/policy"} alt="Privacy and Terms">
+												Privacy and Terms
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/blog"} alt="Blog">
+													Blog
 												</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem onClick={() => signOut()}>
@@ -239,7 +249,7 @@ function Header() {
 										</>
 									) : (
 										<>
-											<DropdownMenuLabel>Cleaner App</DropdownMenuLabel>
+											{/* <DropdownMenuLabel>Cleaner App</DropdownMenuLabel> */}
 											<DropdownMenuSeparator />
 											<DropdownMenuItem>
 												<Link href={"/category"} alt="category">
@@ -247,8 +257,18 @@ function Header() {
 												</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem>
-												<Link href={"/workers"} alt="worker">
-													Workers
+												<Link href={"/contact"} alt="Contact">
+													Contact
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/policy"} alt="Privacy and Terms">
+												Privacy and Terms
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/blog"} alt="Blog">
+													Blog
 												</Link>
 											</DropdownMenuItem>
 										</>

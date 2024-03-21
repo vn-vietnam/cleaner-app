@@ -1,13 +1,14 @@
 import React from "react";
 import CategoryList from "../_components/CategoryList";
-import { Handshake } from "lucide-react";
+import { Handshake, Home, Hourglass } from "lucide-react";
 
 function page() {
 	return (
 		<div className="">
 			<CategoryList />
-			<div className="flex justify-center items-center min-h-[250px]">
-				<Handshake size={100} color="#ff00a2" strokeWidth={1.25} />
+			<div className="flex justify-center items-center min-h-[250px] flex-col gap-5">
+				<Home size={100}  />
+				<div>Select type of house</div>
 			</div>
 		</div>
 	);

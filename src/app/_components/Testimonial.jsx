@@ -13,7 +13,7 @@ function Testimonial() {
 						<div className="flex items-center gap-4">
 							<img
 								alt=""
-								src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+								src="/user_5.jpg"
 								className="size-14 rounded-full object-cover"
 							/>
 
@@ -62,16 +62,16 @@ function Testimonial() {
 								</div>
 
 								<p className="mt-0.5 text-lg font-medium text-gray-900">
-									Paul Starr
+									Chani
 								</p>
 							</div>
 						</div>
 
 						<p className="mt-4 text-gray-700">
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-							sit rerum incidunt, a consequuntur recusandae ab saepe illo est
-							quia obcaecati neque quibusdam eius accusamus error officiis atque
-							voluptates magnam!
+							HomeFinder made our house hunting experience incredibly smooth and
+							efficient. The platform's user-friendly interface allowed us to
+							easily browse through listings, filter our search based on our
+							preferences, and save our favorite properties for later reference.
 						</p>
 					</blockquote>
 
@@ -79,7 +79,7 @@ function Testimonial() {
 						<div className="flex items-center gap-4">
 							<img
 								alt=""
-								src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+								src="/user_4.webp"
 								className="size-14 rounded-full object-cover"
 							/>
 
@@ -128,16 +128,16 @@ function Testimonial() {
 								</div>
 
 								<p className="mt-0.5 text-lg font-medium text-gray-900">
-									Paul Starr
+									Paul Atreides
 								</p>
 							</div>
 						</div>
 
 						<p className="mt-4 text-gray-700">
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-							sit rerum incidunt, a consequuntur recusandae ab saepe illo est
-							quia obcaecati neque quibusdam eius accusamus error officiis atque
-							voluptates magnam!
+							What truly impressed us was the personalized support we received
+							from the HomeFinder team. Their knowledgeable agents guided us
+							through every step of the process, answering our questions
+							promptly and offering valuable insights.
 						</p>
 					</blockquote>
 
@@ -145,7 +145,7 @@ function Testimonial() {
 						<div className="flex items-center gap-4">
 							<img
 								alt=""
-								src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+								src="/user_6.jpg"
 								className="size-14 rounded-full object-cover"
 							/>
 
@@ -194,16 +194,15 @@ function Testimonial() {
 								</div>
 
 								<p className="mt-0.5 text-lg font-medium text-gray-900">
-									Paul Starr
+									Vladimir Harkonnen
 								</p>
 							</div>
 						</div>
 
 						<p className="mt-4 text-gray-700">
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-							sit rerum incidunt, a consequuntur recusandae ab saepe illo est
-							quia obcaecati neque quibusdam eius accusamus error officiis atque
-							voluptates magnam!
+							Thanks to HomeFinder, we found the perfect home that ticks all the
+							boxes for our family. We highly recommend HomeFinder to anyone in
+							search of their dream home!
 						</p>
 					</blockquote>
 				</div>

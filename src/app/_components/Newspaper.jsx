@@ -8,13 +8,15 @@ function Newspaper({ categoryList }) {
 			<div className="p-8 md:p-12 lg:px-16 lg:py-24">
 				<div className="mx-auto max-w-lg text-center">
 					<h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit
+						Find Your Dream Home Today
 					</h2>
 
 					<p className="hidden text-gray-500 sm:mt-4 sm:block">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae dolor
-						officia blanditiis repellat in, vero, aperiam porro ipsum laboriosam
-						consequuntur exercitationem incidunt tempora nisi?
+						With HomeFinder, you gain access to an extensive database of
+						listings, including apartments, houses, condos, and more. Our
+						user-friendly platform allows you to search by location, price,
+						size, and amenities, making it easy to find the home that suits your
+						needs.
 					</p>
 				</div>
 
@@ -55,41 +57,6 @@ function Newspaper({ categoryList }) {
 						</button>
 					</form>
 				</div>
-				{/* list */}
-				<div
-					className="m-4 md:mx-22 lg:mx-52 grid grid-cols-3
-    md:grid-cols-4 lg:grid-cols-6 gap-4"
-				>
-					{categoryList.length > 0
-						? categoryList.map((category, index) => (
-								<Link
-									href={"/category/" + category.id}
-									key={index}
-									className={`flex flex-col items-center
-             justify-center gap-2
-             bg-purple-200 p-5 rounded-lg
-             cursor-pointer hover:scale-110 transition-all ease-in-out
-             `}
-								>
-									<Image
-										src={category.icon.url}
-										alt="icon"
-										width={35}
-										height={35}
-									/>
-									<h2 className="text-primary">{category.name}</h2>
-								</Link>
-						  ))
-						: [1, 2, 3, 4, 5, 6].map((item, index) => (
-								<div
-									key={index}
-									className="h-[120px]
-                w-full bg-slate-200 animate-pulse
-                rounded-lg"
-								></div>
-						  ))}
-				</div>
-				{/* list */}
 			</div>
 		</section>
 	);

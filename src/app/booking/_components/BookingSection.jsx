@@ -41,7 +41,7 @@ function BookingSection({ bookingHistory, getUserBookingHistory }) {
 						{/* <th>ID</th> */}
 						<th>Date</th>
 						<th>Time</th>
-						<th>Worker</th>
+						<th>House</th>
 						<th>Status</th>
 						<th>Delete</th>
 					</tr>

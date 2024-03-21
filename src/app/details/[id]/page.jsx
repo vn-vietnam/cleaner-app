@@ -1,13 +1,28 @@
 "use client";
 import GlobalApi from "@/app/apiService/GlobalApi";
 import { Button } from "@/components/ui/button";
-import { Contact, Mail } from "lucide-react";
+import {
+	Contact,
+	DollarSign,
+	Home,
+	HomeIcon,
+	LocateIcon,
+	Mail,
+} from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import FormBooking from "../_components/FormBooking";
 import { signIn, useSession } from "next-auth/react";
-
+import parse from "html-react-parser";
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 function page() {
 	const param = useParams();
 	const { data, status } = useSession();
@@ -21,7 +36,7 @@ function page() {
 	const getBusinessByCate = () => {
 		GlobalApi.getSingleBusiness(param.id).then((resp) => {
 			setBusinessbyCate(resp.business);
-			// console.log(resp.business);
+			console.log(resp.business);
 		});
 	};
 	const checkUserAuth = () => {
@@ -37,24 +52,52 @@ function page() {
 		status == "authenticated" &&
 		businessbyCate && (
 			<div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-10">
-				<div
-					className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
-lg:grid-cols-4 gap-6 mt-5 "
-				>
+				<div className="flex flex-col gap-5">
 					{businessbyCate ? (
 						<>
+							<Breadcrumb>
+								<BreadcrumbList>
+									<BreadcrumbItem>
+										<BreadcrumbLink href="/">
+											<Home />
+										</BreadcrumbLink>
+									</BreadcrumbItem>
+									<BreadcrumbSeparator />
+									<BreadcrumbItem>
+										{businessbyCate?.categories && (
+											<BreadcrumbLink
+												href={"/category/" + businessbyCate?.categories[0]?.id}
+											>
+												{businessbyCate?.categories[0]?.name}
+											</BreadcrumbLink>
+										)}
+									</BreadcrumbItem>
+									<BreadcrumbSeparator />
+									<BreadcrumbItem>
+										<BreadcrumbPage>{businessbyCate.name}</BreadcrumbPage>
+									</BreadcrumbItem>
+								</BreadcrumbList>
+							</Breadcrumb>
 							<Image
 								src={businessbyCate?.image?.url || "./logo.svg"}
 								alt="img"
 								width={20}
 								height={10}
-								className="object-cover sm:w-[400px] sm:h-[500px] w-full rounded-lg"
+								className="object-cover md:h-[500px] w-full rounded-lg"
 							/>
 							<div className="flex flex-col gap-3">
 								<div className="text-xl font-bold">{businessbyCate.name}</div>
 								<div className="flex gap-3">
 									<Contact />
 									<div>{businessbyCate.contactPerson}</div>
+								</div>
+								<div className="flex gap-3">
+									<DollarSign />
+									<div>${businessbyCate.price}</div>
+								</div>
+								<div className="flex gap-3">
+									<HomeIcon />
+									<div>{businessbyCate.address}</div>
 								</div>
 								<div className="flex gap-3">
 									<Mail />
@@ -70,10 +113,20 @@ lg:grid-cols-4 gap-6 mt-5 "
 										</div>
 									))}
 								</div>
+								<div className="flex gap-3 flex-wrap">
+									{businessbyCate?.facilities?.map((e, index) => (
+										<div
+											className="border-[1px] p-2 text-sm rounded-lg bg-yellow-200"
+											key={index}
+										>
+											{e}
+										</div>
+									))}
+								</div>
 								<FormBooking InfoUser={businessbyCate}>
-									<Button>Book now</Button>
+									<Button className="md:w-[200px]">Appointment</Button>
 								</FormBooking>
-								<div>{businessbyCate.about}</div>
+								<div>{businessbyCate?.info && parse(businessbyCate?.info?.html)}</div>
 							</div>
 						</>
 					) : (

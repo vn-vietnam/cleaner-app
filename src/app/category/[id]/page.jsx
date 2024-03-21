@@ -27,7 +27,7 @@ function page() {
 			<CategoryList paramId={param.id} />
 			<div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-10">
 				<div className="flex justify-between w-full flex-col">
-					<h2 className="font-bold text-[22px]">Workers</h2>
+					<h2 className="font-bold text-[22px]">HomeFinder</h2>
 				</div>
 				<div
 					className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
@@ -61,20 +61,35 @@ function page() {
 												<div className="" key={index}>
 													<div
 														// href={"/category/" + e.id}
-														className="p-1 bg-purple-200
+														className="p-1 bg-blue-300
                     text-primary rounded-full px-2
-                     text-[12px] hover:bg-purple-300"
+                     text-[12px] hover:bg-blue-400"
 													>
 														{e?.name}
 													</div>
 												</div>
 											))}
 										</div>
-										<h2 className="text-primary">{business?.email}</h2>
+										<div className="flex flex-wrap gap-1">
+											{business?.facilities?.map((e, index) => (
+												<div className="flex gap-2" key={index}>
+													<div
+														// href={"/category/" + e.id}
+														className="p-1 bg-purple-200
+                    text-primary rounded-full px-2
+                     text-[12px] hover:bg-purple-300"
+													>
+														{e}
+													</div>
+												</div>
+											))}
+										</div>
+										<h2 className="text-primary text-sm">{business?.email}</h2>
+										<h2 className="text-primary text-sm text-red-400">Price: ${business?.price}</h2>
 										<h2 className="text-gray-500 text-sm">
 											{business?.address}
 										</h2>
-										<Button className="rounded-lg mt-3">Book Now</Button>
+										<Button className="rounded-lg mt-3 bg-blue-300 text-black hover:text-white">Detail</Button>
 									</div>
 								</Link>
 						  ))

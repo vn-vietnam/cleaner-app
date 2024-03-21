@@ -7,8 +7,11 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-	title: "Cleaner Next App",
-	description: "Cleaner next app",
+	title: "HomeFinder",
+	description: "HomeFinder: Your Gateway to the Perfect Home",
+	icons: {
+		icon: "/logo.svg", // /public path
+	},
 };
 
 export default function RootLayout({ children }) {

@@ -11,6 +11,7 @@ const getCategory = async () => {
 			categories {
 				id
 				name
+				description
 				icon {
 					url
 				}
@@ -47,6 +48,7 @@ const getBussinesses = async () => {
 					name
 					id
 				}
+				facilities
 			}
 		}
 	`;
@@ -72,6 +74,12 @@ const getSingleBusiness = async (id) => {
 		  }
 		  categories {
 			name
+			id
+		  }
+		  price
+		  facilities
+		  info{
+      		html
 		  }
 		}
 	  }
@@ -95,10 +103,12 @@ const getBusinessByCategory = async (id) => {
 					name
 					id
 				}
+				facilities
 				image {
 					url
 				  }
 				email
+				price
 			}
 		}
 	`;

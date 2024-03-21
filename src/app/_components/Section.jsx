@@ -8,25 +8,28 @@ function Section() {
 					<div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
 						<img
 							alt=""
-							src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+							src="/house.jpg"
 							className="absolute inset-0 h-full w-full object-cover"
 						/>
 					</div>
 
 					<div className="lg:py-24">
 						<h2 className="text-3xl font-bold sm:text-4xl">
-							Grow your audience
+							Discover Your Ideal Home with{" "}
+							<span className="text-red-700">HomeFinder</span>
 						</h2>
 
 						<p className="mt-4 text-gray-600">
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui
-							hic atque tenetur quis eius quos ea neque sunt, accusantium soluta
-							minus veniam tempora deserunt? Molestiae eius quidem quam
-							repellat.
+							Our user-friendly platform empowers you to explore various options,
+							compare features, and connect with trusted real estate
+							professionals to make informed decisions. At HomeFinder, we're
+							dedicated to helping you discover a space that suits your
+							lifestyle, preferences, and budget. Start your journey to finding
+							the ideal home today with HomeFinder
 						</p>
 
 						<a
-							href="#"
+							href="/category"
 							className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
 						>
 							Get Started Today
