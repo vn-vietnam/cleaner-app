@@ -124,15 +124,26 @@ const createNewBooking = async (
 	userEmail,
 	userName
 ) => {
-	const mutationQuery = gql`
+	const mutationQuery =
+		gql`
 		mutation CreateBooking {
 			createBooking(
 				data: {
-					userName: "`+userName+`"
-					userEmail: "`+userEmail+`"
-					date: "`+date+`"
-					time: "`+time+`"
-					business: { connect: { id: "`+businessId+`" } }
+					userName: "` +
+		userName +
+		`"
+					userEmail: "` +
+		userEmail +
+		`"
+					date: "` +
+		date +
+		`"
+					time: "` +
+		time +
+		`"
+					business: { connect: { id: "` +
+		businessId +
+		`" } }
 					progressStatus: book
 				}
 			) {
@@ -149,26 +160,50 @@ const createNewBooking = async (
 	const result = await request(MASTER_URL, mutationQuery);
 	return result;
 };
+const createTest = async (name, url) => {
+	const mutationQuery =
+		gql`
+		mutation CreateSlider {
+				createSlider(data: { name: "` +
+		name +
+		`", image: { create: { uploadUrl: "` +
+		url +
+		`" } } }) {
+					id
+				}
+		}
+	`;
+	const result = await request(MASTER_URL, mutationQuery);
+	return result;
+};
 
-const BusinessBookedSlot=async(businessId,date)=>{
-	const query=gql`
+const BusinessBookedSlot = async (businessId, date) => {
+	const query =
+		gql`
 	query BusinessBookedSlot {
-		bookings(where: {business: {id: "`+businessId+`"}, date: "`+date+`"}) {
+		bookings(where: {business: {id: "` +
+		businessId +
+		`"}, date: "` +
+		date +
+		`"}) {
 			id
 			userName
 			time
 			date
 		  }
 	}
-	`
-	const result=await request(MASTER_URL,query)
+	`;
+	const result = await request(MASTER_URL, query);
 	return result;
-  }
-  
-  const GetUserBookingHistory=async(userEmail)=>{
-	const query=gql`
+};
+
+const GetUserBookingHistory = async (userEmail) => {
+	const query =
+		gql`
 	query GetUserBookingHistory {
-		bookings(where: {userEmail: "`+userEmail+`"}, orderBy: publishedAt_DESC) {
+		bookings(where: {userEmail: "` +
+		userEmail +
+		`"}, orderBy: publishedAt_DESC) {
 			date
 			id
 			time
@@ -187,70 +222,79 @@ const BusinessBookedSlot=async(businessId,date)=>{
 			progressStatus
 		  }
 	}
-	`
-	const result=await request(MASTER_URL,query)
+	`;
+	const result = await request(MASTER_URL, query);
 	return result;
-  
-  }
-  
-  
-  const deleteBooking=async(bookingId)=>{
-	const mutationQuery=gql`
+};
+
+const deleteBooking = async (bookingId) => {
+	const mutationQuery =
+		gql`
 	mutation DeleteBooking {
-		deleteBooking(where: {id: "`+bookingId+`"}) {
+		deleteBooking(where: {id: "` +
+		bookingId +
+		`"}) {
 			userName
 			userEmail
 		  }
 	}
 	
 	
-	`
-  
-	const result=await request(MASTER_URL,mutationQuery)
+	`;
+
+	const result = await request(MASTER_URL, mutationQuery);
 	return result;
-  
-  }
-  
-  const signWithWorker=async(tf,id)=>{
-	const mutationQuery=gql`
+};
+
+const signWithWorker = async (tf, id) => {
+	const mutationQuery =
+		gql`
 	mutation signWithWorker {
-		updateBusiness(where: {id: "`+id+`"}, data: {isUser: "`+tf+`"}) {
+		updateBusiness(where: {id: "` +
+		id +
+		`"}, data: {isUser: "` +
+		tf +
+		`"}) {
 			isUser
 		  }
 	}
 	
 	
-	`
-  
-	const result=await request(MASTER_URL,mutationQuery)
+	`;
+
+	const result = await request(MASTER_URL, mutationQuery);
 	return result;
-  
-  }
-  
-  const createNewBussiness=async(name,contact,address,about,email,url,cateId)=>{
-	const mutationQuery=gql`
+};
+
+const createNewBussiness = async (
+	name,
+	contact,
+	address,
+	// info,
+	email,
+	url,
+	cateId,
+	price
+) => {
+	const mutationQuery =
+		gql`
 	mutation createNewBussiness {
 		createBusiness(
-			data: {name: "`+name+`", contactPerson: "`+contact+`", address: "`+address+`", isUser: false, about: "`+about+`", email: "`+email+`", image: {create: {uploadUrl: "`+url+`"}}, categories: {connect: {id: "`+cateId+`"}}}
+			data: {name: "`+name+`", contactPerson: "`+contact+`", address: "`+address+`", image: {create: {uploadUrl: "`+url+`"}}, categories: {connect: {id: "`+cateId+`"}}, email: "`+email+`", price: "`+price+`"}
 		  ) {
 			email
 			name
-			address
-			contactPerson
 			id
 		  }
 
 	}
 	
 	
-	`
-  
-	const result=await request(MASTER_URL,mutationQuery)
-	return result;
-  
-  }
-  
+	`;
 
+	const result = await request(MASTER_URL, mutationQuery);
+	return result;
+};
 
 export default {
 	getCategory,
@@ -262,5 +306,6 @@ export default {
 	GetUserBookingHistory,
 	deleteBooking,
 	signWithWorker,
-	createNewBussiness
+	createNewBussiness,
+	createTest,
 };

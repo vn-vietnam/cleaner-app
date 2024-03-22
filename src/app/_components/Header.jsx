@@ -229,6 +229,11 @@ function Header() {
 												</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem>
+												<Link href={"/post"} alt="post">
+													Post new
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
 												<Link href={"/contact"} alt="Contact">
 													Contact
 												</Link>

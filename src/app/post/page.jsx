@@ -18,16 +18,18 @@ import React, { useEffect, useState } from "react";
 import GlobalApi from "../apiService/GlobalApi";
 import { useToast } from "@/components/ui/use-toast";
 import { redirect, useRouter } from "next/navigation";
-
+import { CldUploadButton } from "next-cloudinary";
+import axios from "axios";
+import { ArrowUpLeft, Pen, PenIcon, PenLine, PenTool } from "lucide-react";
 function page() {
 	const { data } = useSession();
 	const [cateList, setCateList] = useState([]);
-	const [name, setName] = useState();
 	const [contact, setContact] = useState();
 	const [address, setAddress] = useState();
-	const [email, setEmail] = useState();
-	const [about, setAbout] = useState();
+	const [info, setInfo] = useState();
 	const [opt, setOpt] = useState();
+	const [price, setPrice] = useState();
+	const [facility, setFacility] = useState();
 	const { toast } = useToast();
 	const router = useRouter();
 	useEffect((e) => {
@@ -36,72 +38,92 @@ function page() {
 	const getBussinessList = () => {
 		GlobalApi.getCategory().then((resp) => {
 			setCateList(resp.categories);
-
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const [file, setFile] = useState(null);
+	const [filename, setFilename] = useState("");
 
-		GlobalApi.createNewBussiness(
-			data?.user?.name,
-			contact,
-			address,
-			about,
-			data?.user?.email,
-			data?.user?.image,
-			opt
-		).then(
-			(resp) => {
-				// console.log(resp);
-				if (resp) {
+	const handleFileChange = (event) => {
+		setFile(event.target.files[0]);
+		setFilename(event.target.files[0].name);
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		const formData = new FormData();
+		formData.append("file", file);
+		formData.append("upload_preset", "testforproject");
+
+		try {
+			const response = await axios.post(
+				`https://api.cloudinary.com/v1_1/ddjctqh9z/image/upload`,
+				formData
+			);
+
+			GlobalApi.createNewBussiness(
+				data?.user?.name,
+				contact,
+				address,
+				// info,
+				data?.user?.email,
+				response?.data?.url,
+				opt,
+				price
+			).then(
+				(resp) => {
+					if (resp) {
+						// console.log(resp);
+						toast({
+							title: "Success: Please waiting for admin check profile",
+						});
+						router.push("/");
+					}
+				},
+				(e) => {
+					// console.log(e);
 					toast({
-						title: "Alert: Please waiting for admin check profile",
+						title: "Something Wrong",
 					});
-					// Toast Msg
-					router.push("/");
 				}
-			},
-			(e) => {
-				toast({
-					title: "Something Wrong",
-				});
-
-			}
-		);
+			);
+		} catch (error) {
+			toast({
+				title: "Something Wrong",
+			});
+			// console.error(error);
+		}
 	};
 
 	return (
 		<div className="flex flex-col w-full h-[500px] justify-center items-center gap-10 my-5">
-			<div className="text-3xl gap-5">Sign as</div>
+			<div className="text-3xl gap-5">Post new</div>
 			<div className="flex gap-5 sm:flex-row flex-col">
 				<Link
 					href={"/"}
 					className="w-[200px] h-[200px] p-2 bg-red-300 flex justify-center items-center font-bold hover:bg-red-500 cursor-pointer rounded-xl"
 				>
-					User
+					<ArrowUpLeft />
+					Back
 				</Link>
-
 				<AlertDialog>
 					<AlertDialogTrigger>
 						<div className="w-[200px] h-[200px] p-2 bg-red-300 flex justify-center items-center font-bold hover:bg-red-500 cursor-pointer rounded-xl">
-							Employer
+							<PenTool />
+							Post
 						</div>
 					</AlertDialogTrigger>
 					<AlertDialogContent>
 						<AlertDialogHeader>
-							<AlertDialogTitle>Please fill all information in the form?</AlertDialogTitle>
+							<AlertDialogTitle>
+								Please fill all information in the form?
+							</AlertDialogTitle>
 							<AlertDialogDescription className="flex flex-col gap-3">
 								<Input
 									className=""
-									placeholder="Name"
-									onChange={(e) => setName(e.target.value)}
-									value={name}
-								/>
-								<Input
-									className=""
-									placeholder="Contact"
-									onChange={(e) => setContact(e.target.value)}
+									placeholder="Price"
+									onChange={(e) => setPrice(e.target.value)}
 								/>
 								<Input
 									className=""
@@ -110,22 +132,27 @@ function page() {
 								/>
 								<Input
 									className=""
-									value={email}
-									placeholder="Email"
-									onChange={(e) => setEmail(e.target.value)}
+									placeholder="Contact"
+									onChange={(e) => setContact(e.target.value)}
 								/>
-								<Input
-									className=""
-									placeholder="About me"
-									onChange={(e) => setAbout(e.target.value)}
-								/>
-								<select name="" id="" onChange={(e) => setOpt(e.target.value)}>
+								<select
+									name=""
+									id=""
+									className="border-[1px] rounded-md p-2"
+									onChange={(e) => setOpt(e.target.value)}
+								>
 									{cateList?.map((e, index) => (
 										<option key={index} value={e.id}>
 											{e.name}
 										</option>
 									))}
 								</select>
+								<input onChange={handleFileChange} type="file" />
+								{/* <textarea
+									className="border-[1px] rounded-md p-2 h-[200px]"
+									placeholder="Info house"
+									onChange={(e) => setInfo(e.target.value)}
+								/> */}
 							</AlertDialogDescription>
 						</AlertDialogHeader>
 						<AlertDialogFooter>
